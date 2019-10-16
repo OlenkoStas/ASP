@@ -1,0 +1,98 @@
+﻿@model Lesson_03.Models.InvitationGameViewModel
+@using Lesson_03.Models.Enums
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="~/signalR/hubs"></script>
+
+ @if (User.Identity.IsAuthenticated)
+{
+    <input type="hidden" id="NickName" value=@User.Identity.Name />
+    <input type="hidden" id="IsAuthenticated" value="true" />
+}
+else
+{
+    <input type="hidden" id="NickName" value='Посетитель' />
+}
+    <div class="content">
+        <div class="left-box">
+            <div class="gamesList-box">
+                <p>Приглашения</p>
+                <div class="line"></div>
+                <div id="gamesList">
+                </div>
+            </div>
+            <div class="common-chat-box ">
+                <div id="commonChat" class="common-chat-room chat">
+                    <div>
+                        <b>Nickname:</b>
+                        Что-то написание пользователями.
+                    </div>
+                </div>
+                <div class="send-messages" id="messages">
+                    <div class="input-msg-com">
+                        <textarea id="inputMessagesCom" placeholder="Новое сообщение..."></textarea>
+                    </div>
+                    <div>
+                        <button class="btn-send-com" id="btnSendCommon">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-box">
+            <div id="game" class="game-box">
+                <script language="JavaScript1.1" src="~/Scripts/chatScripts.js"></script>
+                <button id="giveUp">Сдаться</button>
+                <button id="btnCreateGame">Создать игру</button>
+                <span id="time" class="timer"></span>
+                
+            </div>
+            <div class="players-chat-box">
+                <div id="playersChatRoom" class="chat">
+                    <b>Приватный чат игроков</b>
+                </div>
+                <div class="send-messages" id="messages">
+                    <div class="input-msg">
+                        <textarea id="inputMessages" placeholder="Новое сообщение..."></textarea>
+                    </div>
+                    <div>
+                        <button class="btn-send" id="btnSend">Send</button>
+                    </div>
+                </div>
+
+            </div>
+                
+        </div>
+        
+    </div>
+    <div class="create-game-box">
+        <div>
+            @Html.LabelFor(m => m.Color)
+            <br />
+            @Html.RadioButtonFor(m => m.Color, "black") Черный
+            <br />
+            @Html.RadioButtonFor(m => m.Color, "white", new { @checked = "checked" }) Белый
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.GameTime)
+            <input type="time" name="Time" min="03:00" max="15:00" value="05:00" />(min=3m,max:15m)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Type)
+            @Html.DropDownListFor(m => m.Type, EnumHelper.GetSelectList(typeof(GameType)))
+        </div>
+        <div>
+            @Html.Label("Автопоиск")
+            @Html.CheckBox("autoSearch",true,htmlAttributes:new { @title="Если подходящих предложений нет,то ваше будет добовлено в список приглашений." })
+        </div>
+        <button id="create">Создать</button>
+    </div>
+
+
+
+

@@ -1,0 +1,58 @@
+﻿@model Lesson_03.Models.Chat.GamesArchive
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Подробности</h2>
+
+<div>
+    <h4>GamesArchive</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerOne)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerOne)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerTwo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerTwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Winner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Winner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moves)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Moves)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Назад", "Arhive", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("На главную", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>
